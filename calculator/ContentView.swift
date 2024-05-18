@@ -8,79 +8,112 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+enum CalculatorMode {
+    case notSet
+    case addition
+    case subtraction
+    case multiplication
+}
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
+struct ContentView: View{
+    @State var currentValue = "0"
+    @State var currentMode: CalculatorMode = .notSet
+    @State var lastButtonWasMode = false
+    @State var savedNum = 0
+    @State var currentValueInt = 0
+    var body: some View{
+        ZStack {
+            Color(.black)
+            VStack {
+                TotalText(value: currentValue)
+                HStack {
+                    CalculatorButton(buttonText: "1", action: didPressNumber)
+                    CalculatorButton(buttonText: "2", action: didPressNumber)
+                    CalculatorButton(buttonText: "3", action: didPressNumber)
+                    CalculatorButton(buttonText: "X", color: .orange, action: didPressMode,  mode: .multiplication)
                 }
-                .onDelete(perform: deleteItems)
+                HStack {
+                    CalculatorButton(buttonText: "4", action: didPressNumber)
+                    CalculatorButton(buttonText: "5", action: didPressNumber)
+                    CalculatorButton(buttonText: "6", action: didPressNumber)
+                    CalculatorButton(buttonText: "-", color: .orange, action: didPressMode, mode: .subtraction)
+                }
+                HStack {
+                    CalculatorButton(buttonText: "7", action: didPressNumber)
+                    CalculatorButton(buttonText: "8", action: didPressNumber)
+                    CalculatorButton(buttonText: "9", action: didPressNumber)
+                    CalculatorButton(buttonText: "+", color: .orange, action: didPressMode, mode: .addition)
+                }
+                HStack {
+                    CalculatorButton(buttonText: "0", width: 170, action: didPressNumber)
+                    CalculatorButton(buttonText: "C", color: .gray, action: didPressClear)
+                    CalculatorButton(buttonText: "=", color: .orange, action: didPressEqauls)
+                }
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
+        }
+        .ignoresSafeArea()
+    }
+    
+    func didPressNumber(button: CalculatorButton) {
+        if lastButtonWasMode {
+            lastButtonWasMode = false
+            currentValueInt = 0
+        }
+        if let parsedValue = Int("\(currentValueInt)" + button.buttonText) {
+            currentValueInt = parsedValue
+            updateText()
+        } else {
+            currentValue = "Error"
+            currentValueInt = 0
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    
+    func didPressMode(button: CalculatorButton) {
+        currentMode = button.mode
+        lastButtonWasMode = true
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+    
+    func didPressEqauls(button: CalculatorButton) {
+        if currentMode == .notSet || lastButtonWasMode {
+            return
         }
+        
+        if currentMode == .addition {
+            savedNum += currentValueInt
+        } else if currentMode == .subtraction {
+            savedNum -= currentValueInt
+        } else if currentMode == .multiplication{
+            savedNum *= currentValueInt
+        }
+        
+        currentValueInt = savedNum
+        updateText()
+        lastButtonWasMode = true
+    }
+    
+    func didPressClear(button:CalculatorButton) {
+        currentValue = "0"
+        currentMode = .notSet
+        lastButtonWasMode = false
+        savedNum = 0
+        currentValueInt = 0
+    }
+    
+    func updateText() {
+        if currentMode == .notSet {
+            savedNum = currentValueInt
+        }
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let num = NSNumber(value: currentValueInt)
+        
+        currentValue = numberFormatter.string(from: num) ?? "Error"
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
-#Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View{
+        ContentView()
+    }
 }

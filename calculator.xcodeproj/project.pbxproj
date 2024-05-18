@@ -16,6 +16,8 @@
 		03ECFB452BED6B670045A39D /* calculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ECFB442BED6B670045A39D /* calculatorTests.swift */; };
 		03ECFB4F2BED6B670045A39D /* calculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ECFB4E2BED6B670045A39D /* calculatorUITests.swift */; };
 		03ECFB512BED6B670045A39D /* calculatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ECFB502BED6B670045A39D /* calculatorUITestsLaunchTests.swift */; };
+		03ECFB5E2BED6E9C0045A39D /* TotalText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ECFB5D2BED6E9C0045A39D /* TotalText.swift */; };
+		03ECFB602BED70370045A39D /* calculatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ECFB5F2BED70370045A39D /* calculatorButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		03ECFB4A2BED6B670045A39D /* calculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = calculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03ECFB4E2BED6B670045A39D /* calculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculatorUITests.swift; sourceTree = "<group>"; };
 		03ECFB502BED6B670045A39D /* calculatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		03ECFB5D2BED6E9C0045A39D /* TotalText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalText.swift; sourceTree = "<group>"; };
+		03ECFB5F2BED70370045A39D /* calculatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculatorButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 			children = (
 				03ECFB2E2BED6B660045A39D /* calculatorApp.swift */,
 				03ECFB302BED6B660045A39D /* ContentView.swift */,
+				03ECFB5F2BED70370045A39D /* calculatorButton.swift */,
+				03ECFB5D2BED6E9C0045A39D /* TotalText.swift */,
 				03ECFB322BED6B670045A39D /* Assets.xcassets */,
 				03ECFB372BED6B670045A39D /* Persistence.swift */,
 				03ECFB392BED6B670045A39D /* calculator.xcdatamodeld */,
@@ -264,8 +270,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				03ECFB382BED6B670045A39D /* Persistence.swift in Sources */,
+				03ECFB602BED70370045A39D /* calculatorButton.swift in Sources */,
 				03ECFB3B2BED6B670045A39D /* calculator.xcdatamodeld in Sources */,
 				03ECFB312BED6B660045A39D /* ContentView.swift in Sources */,
+				03ECFB5E2BED6E9C0045A39D /* TotalText.swift in Sources */,
 				03ECFB2F2BED6B660045A39D /* calculatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +438,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"calculator/Preview Content\"";
+				DEVELOPMENT_TEAM = HQTCUERK38;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -458,6 +467,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"calculator/Preview Content\"";
+				DEVELOPMENT_TEAM = HQTCUERK38;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -485,6 +495,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HQTCUERK38;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MARKETING_VERSION = 1.0;
@@ -504,6 +515,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HQTCUERK38;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MARKETING_VERSION = 1.0;
@@ -522,6 +534,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HQTCUERK38;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = jhol.calculatorUITests;
@@ -539,6 +552,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HQTCUERK38;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = jhol.calculatorUITests;
